@@ -8,15 +8,13 @@ using TestGoalSystems.Domain;
 namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInventory
 {
     public class DeleteInventoryCommandHandler : IRequestHandler<DeleteInventoryCommand>
-    {
-        //private readonly IInventoryRepository _inventoryRepository;
+    {        
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteInventoryCommandHandler> _logger;
 
         public DeleteInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<DeleteInventoryCommandHandler> logger)
-        {
-            //_inventoryRepository = inventoryRepository;
+        {     
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
@@ -33,8 +31,7 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInvent
             }
 
             _mapper.Map(request, inventoryToDelete, typeof(DeleteInventoryCommand), typeof(Inventory));
-
-            //await _inventoryRepository.DeleteAsync(inventoryToDelete);
+            
             _unitOfWork.InventoryRepository.DeleteEntity(inventoryToDelete);
             await _unitOfWork.Complete();
 

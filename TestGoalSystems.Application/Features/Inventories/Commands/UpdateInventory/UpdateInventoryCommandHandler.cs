@@ -8,15 +8,13 @@ using TestGoalSystems.Domain;
 namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInventory
 {
     public class UpdateInventoryCommandHandler : IRequestHandler<UpdateInventoryCommand>
-    {
-        //private readonly IInventoryRepository _inventoryRepository;
+    {        
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateInventoryCommandHandler> _logger;
 
         public UpdateInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UpdateInventoryCommandHandler> logger)
-        {
-            //_inventoryRepository = inventoryRepository;
+        {            
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
@@ -34,7 +32,10 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInvent
 
             _mapper.Map(request, inventoryToUpdate, typeof(UpdateInventoryCommand), typeof(Inventory));
 
-            //await _inventoryRepository.UpdateAsync(inventoryToUpdate);
+            if (request.Expiration <= DateTime.UtcNow)
+            {
+                _logger.LogInformation($"Inventory {inventoryToUpdate.Id} has expired.");
+            }
 
             _unitOfWork.InventoryRepository.UpdateEntity(inventoryToUpdate);
 

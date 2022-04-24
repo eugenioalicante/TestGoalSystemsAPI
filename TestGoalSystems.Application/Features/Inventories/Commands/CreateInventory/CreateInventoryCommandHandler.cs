@@ -7,15 +7,13 @@ using TestGoalSystems.Domain;
 namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInventory
 {
     public class CreateInventoryCommandHandler : IRequestHandler<CreateInventoryCommand, int>
-    {
-        //private readonly IInventoryRepository _inventoryRepository;
+    {        
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateInventoryCommandHandler> _logger;
 
         public CreateInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<CreateInventoryCommandHandler> logger)
-        {
-            //_inventoryRepository = inventoryRepository;
+        {            
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
@@ -24,8 +22,7 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
         public async Task<int> Handle(CreateInventoryCommand request, CancellationToken cancellationToken)
         {
             var inventoryEntity = _mapper.Map<Inventory>(request);
-
-            //var newInventory = await _inventoryRepository.AddAsync(inventoryEntity);
+            
             _unitOfWork.InventoryRepository.AddEntity(inventoryEntity);
 
             var result = await _unitOfWork.Complete();
@@ -36,6 +33,11 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
             }
 
             _logger.LogInformation($"Inventory {inventoryEntity.Id} was created successfully.");
+
+            if (request.Expiration <= DateTime.UtcNow)
+            {
+                _logger.LogInformation($"Inventory {inventoryEntity.Id} has expired.");
+            }
 
             return inventoryEntity.Id;
         }

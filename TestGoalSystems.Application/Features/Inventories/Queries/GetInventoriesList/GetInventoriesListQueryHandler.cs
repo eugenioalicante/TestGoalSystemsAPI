@@ -6,8 +6,7 @@ namespace TestGoalSystems.Application.Features.Inventories.Queries.GetInventorie
 {
     public class GetInventoriesListQueryHandler : IRequestHandler<GetInventoriesListQuery, List<InventoriesVm>>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        //private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;        
         private readonly IMapper _mapper;
 
         public GetInventoriesListQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
