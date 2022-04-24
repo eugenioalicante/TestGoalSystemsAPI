@@ -9,30 +9,34 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInvent
 {
     public class UpdateInventoryCommandHandler : IRequestHandler<UpdateInventoryCommand>
     {
-        private readonly IInventoryRepository _inventoryRepository;
+        //private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateInventoryCommandHandler> _logger;
 
-        public UpdateInventoryCommandHandler(IInventoryRepository inventoryRepository, IMapper mapper, ILogger<UpdateInventoryCommandHandler> logger)
+        public UpdateInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UpdateInventoryCommandHandler> logger)
         {
-            _inventoryRepository = inventoryRepository;
+            //_inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }       
 
         public async Task<Unit> Handle(UpdateInventoryCommand request, CancellationToken cancellationToken)
         {
-            var streamerToUpdate = await _inventoryRepository.GetByIdAsync(request.Id);
+            var inventoryToUpdate = await _unitOfWork.InventoryRepository.GetByIdAsync(request.Id);
 
-            if (streamerToUpdate == null)
+            if (inventoryToUpdate == null)
             {
                 _logger.LogError($"Inventory id not found {request.Id}");
                 throw new NotFoundException(nameof(Inventory), request.Id);
             }
 
-            _mapper.Map(request, streamerToUpdate, typeof(UpdateInventoryCommand), typeof(Inventory));
+            _mapper.Map(request, inventoryToUpdate, typeof(UpdateInventoryCommand), typeof(Inventory));
 
-            await _inventoryRepository.UpdateAsync(streamerToUpdate);
+            //await _inventoryRepository.UpdateAsync(inventoryToUpdate);
+
+            _unitOfWork.InventoryRepository.UpdateEntity(inventoryToUpdate);
 
             _logger.LogInformation($"The operation was successful updating the inventory {request.Id}");
 

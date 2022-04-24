@@ -15,15 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F993FDDA-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6B1F62E8-C19C-4B6B-94B4-4EE4FFF2180B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystems.Application", "TestGoalSystems.Application\TestGoalSystems.Application.csproj", "{843981BD-2A3E-46C7-B3FB-ABC752541857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGoalSystems.Application", "TestGoalSystems.Application\TestGoalSystems.Application.csproj", "{843981BD-2A3E-46C7-B3FB-ABC752541857}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystems.Domain", "TestGoalSystems.Domain\TestGoalSystems.Domain.csproj", "{CC09CE3B-ADFB-442B-9048-BB33990BD672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGoalSystems.Domain", "TestGoalSystems.Domain\TestGoalSystems.Domain.csproj", "{CC09CE3B-ADFB-442B-9048-BB33990BD672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystems.Infrastructure", "TestGoalSystems.Infrastructure\TestGoalSystems.Infrastructure.csproj", "{38FECBF3-4597-41E9-8062-EFDDBD73ECC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGoalSystems.Infrastructure", "TestGoalSystems.Infrastructure\TestGoalSystems.Infrastructure.csproj", "{38FECBF3-4597-41E9-8062-EFDDBD73ECC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystemsAPI", "TestGoalSystemsAPI\TestGoalSystemsAPI.csproj", "{56525AA9-5EDD-420C-B6F8-EAD1BFF0E0C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGoalSystemsAPI", "TestGoalSystemsAPI\TestGoalSystemsAPI.csproj", "{56525AA9-5EDD-420C-B6F8-EAD1BFF0E0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystems.Identity", "TestGoalSystems.Identity\TestGoalSystems.Identity.csproj", "{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGoalSystems.Identity", "TestGoalSystems.Identity\TestGoalSystems.Identity.csproj", "{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoalSystems.Application.UnitTests", "TestGoalSystems.Application.UnitTests\TestGoalSystems.Application.UnitTests.csproj", "{437CEABB-00D2-48DE-8042-77FDE8F5BFE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437CEABB-00D2-48DE-8042-77FDE8F5BFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437CEABB-00D2-48DE-8042-77FDE8F5BFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437CEABB-00D2-48DE-8042-77FDE8F5BFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437CEABB-00D2-48DE-8042-77FDE8F5BFE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{38FECBF3-4597-41E9-8062-EFDDBD73ECC5} = {6B1F62E8-C19C-4B6B-94B4-4EE4FFF2180B}
 		{56525AA9-5EDD-420C-B6F8-EAD1BFF0E0C7} = {5A56BB00-B5CE-43C1-868B-3D8DD8E5ABCB}
 		{9F6470D9-9A51-41C2-BD5B-0F40EF0EFE60} = {6B1F62E8-C19C-4B6B-94B4-4EE4FFF2180B}
+		{437CEABB-00D2-48DE-8042-77FDE8F5BFE5} = {8412F292-2625-4CAB-8058-4FEBB122C478}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E784D876-B6BA-4B00-B0A6-B919797929ED}

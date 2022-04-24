@@ -6,18 +6,19 @@ namespace TestGoalSystems.Application.Features.Inventories.Queries.GetInventorie
 {
     public class GetInventoriesListQueryHandler : IRequestHandler<GetInventoriesListQuery, List<InventoriesVm>>
     {
-        private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IInventoryRepository _inventoryRepository;
         private readonly IMapper _mapper;
 
-        public GetInventoriesListQueryHandler(IInventoryRepository inventoryRepository, IMapper mapper)
+        public GetInventoriesListQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         public async Task<List<InventoriesVm>> Handle(GetInventoriesListQuery request, CancellationToken cancellationToken)
         {
-            var inventoriesList = await _inventoryRepository.GetInventoryByUsername(request._Username);
+            var inventoriesList = await _unitOfWork.InventoryRepository.GetInventoryByUsername(request._Username);
 
             return _mapper.Map<List<InventoriesVm>>(inventoriesList);
         }

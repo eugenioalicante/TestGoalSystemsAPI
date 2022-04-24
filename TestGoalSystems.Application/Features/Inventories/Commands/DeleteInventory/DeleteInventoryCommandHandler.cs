@@ -9,20 +9,22 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInvent
 {
     public class DeleteInventoryCommandHandler : IRequestHandler<DeleteInventoryCommand>
     {
-        private readonly IInventoryRepository _inventoryRepository;
+        //private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteInventoryCommandHandler> _logger;
 
-        public DeleteInventoryCommandHandler(IInventoryRepository inventoryRepository, IMapper mapper, ILogger<DeleteInventoryCommandHandler> logger)
+        public DeleteInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<DeleteInventoryCommandHandler> logger)
         {
-            _inventoryRepository = inventoryRepository;
+            //_inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
 
         public async Task<Unit> Handle(DeleteInventoryCommand request, CancellationToken cancellationToken)
         {
-            var inventoryToDelete = await _inventoryRepository.GetByIdAsync(request.Id);
+            var inventoryToDelete = await _unitOfWork.InventoryRepository.GetByIdAsync(request.Id);
 
             if (inventoryToDelete == null)
             {
@@ -32,7 +34,9 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInvent
 
             _mapper.Map(request, inventoryToDelete, typeof(DeleteInventoryCommand), typeof(Inventory));
 
-            await _inventoryRepository.DeleteAsync(inventoryToDelete);
+            //await _inventoryRepository.DeleteAsync(inventoryToDelete);
+            _unitOfWork.InventoryRepository.DeleteEntity(inventoryToDelete);
+            await _unitOfWork.Complete();
 
             _logger.LogInformation($"The operation was successful eliminating the inventory {request.Id}");
 

@@ -8,13 +8,15 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
 {
     public class CreateInventoryCommandHandler : IRequestHandler<CreateInventoryCommand, int>
     {
-        private readonly IInventoryRepository _inventoryRepository;
+        //private readonly IInventoryRepository _inventoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateInventoryCommandHandler> _logger;
 
-        public CreateInventoryCommandHandler(IInventoryRepository inventoryRepository, IMapper mapper, ILogger<CreateInventoryCommandHandler> logger)
+        public CreateInventoryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ILogger<CreateInventoryCommandHandler> logger)
         {
-            _inventoryRepository = inventoryRepository;
+            //_inventoryRepository = inventoryRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
         }
@@ -23,11 +25,19 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
         {
             var inventoryEntity = _mapper.Map<Inventory>(request);
 
-            var newInventory = await _inventoryRepository.AddAsync(inventoryEntity);
+            //var newInventory = await _inventoryRepository.AddAsync(inventoryEntity);
+            _unitOfWork.InventoryRepository.AddEntity(inventoryEntity);
 
-            _logger.LogInformation($"Inventory {newInventory.Id} was created successfully.");
+            var result = await _unitOfWork.Complete();
 
-            return newInventory.Id;
+            if (result <= 0)
+            {
+                throw new Exception($"Failed to insert inventory record");
+            }
+
+            _logger.LogInformation($"Inventory {inventoryEntity.Id} was created successfully.");
+
+            return inventoryEntity.Id;
         }
     }
 }
