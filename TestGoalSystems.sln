@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{9458B736-88A6-4117-AC30-FAE374857C15}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Goal Systems - Prueba Técnica - Backend Developer.pdf = doc\Goal Systems - Prueba Técnica - Backend Developer.pdf
+		doc\Instructions.pdf = doc\Instructions.pdf
+		doc\TechnicalDocument.pdf = doc\TechnicalDocument.pdf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D496C978-C8EF-487F-8424-B0AC69EC4225}"
 EndProject
