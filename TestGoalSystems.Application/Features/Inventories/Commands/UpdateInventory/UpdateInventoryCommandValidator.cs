@@ -2,9 +2,9 @@
 
 namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInventory
 {
-    public class UpdateStreamerCommandValidator : AbstractValidator<UpdateInventoryCommand>
+    public class UpdateInventoryCommandValidator : AbstractValidator<UpdateInventoryCommand>
     {
-        public UpdateStreamerCommandValidator()
+        public UpdateInventoryCommandValidator()
         {
             RuleFor(p => p.Name)
                .NotEmpty().WithMessage("{Name} cannot be blanck.")

@@ -7,10 +7,10 @@ namespace TestGoalSystems.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private Hashtable _repositories;
+        private Hashtable? _repositories;
         private readonly InventoryDbContext _context;
 
-        private IInventoryRepository _inventoryRepository;
+        private IInventoryRepository? _inventoryRepository;
 
         public IInventoryRepository InventoryRepository => _inventoryRepository ??= new InventoryRepository(_context);
 
@@ -29,7 +29,7 @@ namespace TestGoalSystems.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception("Err");
+                throw new Exception(ex.Message);
             }
         }
 

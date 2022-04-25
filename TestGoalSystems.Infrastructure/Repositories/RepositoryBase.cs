@@ -34,7 +34,7 @@ namespace TestGoalSystems.Infrastructure.Repositories
 
             if (disableTracking) query = query.AsNoTracking();
 
-            if (string.IsNullOrWhiteSpace(includeString)) query = query.Include(includeString);
+            if (!string.IsNullOrWhiteSpace(includeString)) query = query.Include(includeString);
 
             if (predicate != null) query = query.Where(predicate);
 
@@ -44,9 +44,9 @@ namespace TestGoalSystems.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate = null,
-                                        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-                                        List<Expression<Func<T, object>>> includes = null,
+        public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>>? predicate = null,
+                                        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+                                        List<Expression<Func<T, object>>>? includes = null,
                                         bool disableTracking = true)
         {
             IQueryable<T> query = _context.Set<T>();
@@ -63,7 +63,7 @@ namespace TestGoalSystems.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T?> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

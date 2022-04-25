@@ -9,7 +9,7 @@ namespace TestGoalSystems.Identity.Configurations
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            var hasher = new PasswordHasher<ApplicationUser>();
+            var hasher = new PasswordHasher<ApplicationUser?>();
 
             builder.HasData(
                     new ApplicationUser

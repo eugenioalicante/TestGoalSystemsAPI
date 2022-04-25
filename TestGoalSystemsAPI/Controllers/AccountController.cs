@@ -15,12 +15,22 @@ namespace TestGoalSystemsAPI.Controllers
             _authService = authService;
         }
 
+        /// <summary>
+        /// User authentication
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("Login")]
         public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
         {
             return Ok(await _authService.Login(request));
         }
 
+        /// <summary>
+        /// User registration
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("Register")]
         public async Task<ActionResult<RegistrationResponse>> Register([FromBody] RegistrationRequest request)
         {

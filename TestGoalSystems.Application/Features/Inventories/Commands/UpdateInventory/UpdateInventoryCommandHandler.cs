@@ -7,6 +7,9 @@ using TestGoalSystems.Domain;
 
 namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInventory
 {
+    /// <summary>
+    /// Update Inventory Handle
+    /// </summary>
     public class UpdateInventoryCommandHandler : IRequestHandler<UpdateInventoryCommand>
     {        
         private readonly IUnitOfWork _unitOfWork;
@@ -18,8 +21,15 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.UpdateInvent
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _logger = logger;
-        }       
+        }
 
+        /// <summary>
+        /// Create Inventory
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<Unit> Handle(UpdateInventoryCommand request, CancellationToken cancellationToken)
         {
             var inventoryToUpdate = await _unitOfWork.InventoryRepository.GetByIdAsync(request.Id);

@@ -7,6 +7,9 @@ using TestGoalSystems.Domain;
 
 namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInventory
 {
+    /// <summary>
+    /// Delete Inventory Handle
+    /// </summary>
     public class DeleteInventoryCommandHandler : IRequestHandler<DeleteInventoryCommand>
     {        
         private readonly IUnitOfWork _unitOfWork;
@@ -20,6 +23,13 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.DeleteInvent
             _logger = logger;
         }
 
+        /// <summary>
+        /// Create Inventory
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<Unit> Handle(DeleteInventoryCommand request, CancellationToken cancellationToken)
         {
             var inventoryToDelete = await _unitOfWork.InventoryRepository.GetByIdAsync(request.Id);

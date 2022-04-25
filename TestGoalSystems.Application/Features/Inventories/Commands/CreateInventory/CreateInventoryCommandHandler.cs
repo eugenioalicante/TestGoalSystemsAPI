@@ -6,6 +6,9 @@ using TestGoalSystems.Domain;
 
 namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInventory
 {
+    /// <summary>
+    /// Create Inventory Handle
+    /// </summary>
     public class CreateInventoryCommandHandler : IRequestHandler<CreateInventoryCommand, int>
     {        
         private readonly IUnitOfWork _unitOfWork;
@@ -19,6 +22,12 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
             _logger = logger;
         }
 
+        /// <summary>
+        /// Create Inventory
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<int> Handle(CreateInventoryCommand request, CancellationToken cancellationToken)
         {
             var inventoryEntity = _mapper.Map<Inventory>(request);
@@ -29,7 +38,8 @@ namespace TestGoalSystems.Application.Features.Inventories.Commands.CreateInvent
 
             if (result <= 0)
             {
-                throw new Exception($"Failed to insert inventory record");
+                Exception exception = new Exception($"Failed to insert inventory record");
+                throw exception;
             }
 
             _logger.LogInformation($"Inventory {inventoryEntity.Id} was created successfully.");

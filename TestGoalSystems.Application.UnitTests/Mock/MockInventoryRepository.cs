@@ -11,16 +11,16 @@ namespace TestGoalSystems.Application.UnitTests.Mock
             var fixture = new Fixture();
             fixture.Behaviors.Add(new OmitOnRecursionBehavior());
 
-            var streamers = fixture.CreateMany<Inventory>().ToList();
+            var inventories = fixture.CreateMany<Inventory>().ToList();
 
-            streamers.Add(fixture.Build<Inventory>()
+            inventories.Add(fixture.Build<Inventory>()
                 .With(tr => tr.CreatedBy, "system")
                 .With(tr => tr.Id, 2005)
                 .Without(tr => tr.InventoryType)
                 .Create()
             );
 
-            inventoryDbContextFake.Inventory!.AddRange(streamers);
+            inventoryDbContextFake.Inventory!.AddRange(inventories);
             inventoryDbContextFake.SaveChanges();
         }
     }
