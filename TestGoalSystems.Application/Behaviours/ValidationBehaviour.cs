@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using ValidationException = TestGoalSystems.Application.Exceptions.ValidationException;
 
 namespace TestGoalSystems.Application.Behaviours
 {

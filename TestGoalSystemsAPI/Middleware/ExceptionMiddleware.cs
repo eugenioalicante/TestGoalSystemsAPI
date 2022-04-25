@@ -37,9 +37,9 @@ namespace TestGoalSystemsAPI.Middleware
                         statusCode = (int)HttpStatusCode.NotFound;
                         break;
 
-                    case ValidationException validateExpetion:
+                    case ValidationException validationException:
                         statusCode = (int)HttpStatusCode.BadRequest;
-                        var validateJson = JsonConvert.SerializeObject(validateExpetion.Errors);
+                        var validateJson = JsonConvert.SerializeObject(validationException.Errors);
                         result = JsonConvert.SerializeObject(new CodeErrorException(statusCode, ex.Message, validateJson));
                         break;
 
